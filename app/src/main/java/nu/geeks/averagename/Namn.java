@@ -1,31 +1,11 @@
 package nu.geeks.averagename;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
+/**
+ * Created by hannespa on 15-04-16.
+ */
+public class Namn {
 
-import java.lang.ref.SoftReference;
-import java.util.ArrayList;
-import java.util.Random;
-
-
-public class NameMain extends Activity {
-
-    ListView listView;
-    ArrayList<String> names;
-    ArrayAdapter<String> nAdapter;
-    Button bAdd, bAverage;
-    EditText eName;
-
-    String namn = "30.8\tAbbe\n" +
+    public static final String namn = "30.8\tAbbe\n" +
             "30.12\tAbel\n" +
             "18.12\tAbraham\n" +
             "16.6\tAcke\n" +
@@ -89,6 +69,7 @@ public class NameMain extends Activity {
             "5.9\tAline\n" +
             "17.2\tAlla\n" +
             "22.4\tAllan\n" +
+            "1.11\tAllhelgonadagen\n" +
             "17.2\tAlli\n" +
             "17.2\tAllie\n" +
             "17.2\tAlly\n" +
@@ -178,6 +159,7 @@ public class NameMain extends Activity {
             "24.8\tBartolomeus\n" +
             "2.12\tBeata\n" +
             "2.12\tBeatrice\n" +
+            "25.3\tbebådelsedag\n" +
             "27.5\tBeda\n" +
             "20.6\tBelinda\n" +
             "30.10\tBella\n" +
@@ -709,6 +691,7 @@ public class NameMain extends Activity {
             "21.7\tJohanna\n" +
             "21.7\tJohanne\n" +
             "27.12\tJohannes\n" +
+            "24.6\tJohannes Döparens dag\n" +
             "3.5\tJohn\n" +
             "27.12\tJohnnie\n" +
             "27.12\tJohnny\n" +
@@ -729,6 +712,7 @@ public class NameMain extends Activity {
             "27.12\tJuhani\n" +
             "27.12\tJuho\n" +
             "27.12\tJukka\n" +
+            "25.12\tJuldagen\n" +
             "16.2\tJulia\n" +
             "16.2\tJuliana\n" +
             "16.2\tJulie\n" +
@@ -804,6 +788,7 @@ public class NameMain extends Activity {
             "15.3\tKristoffer\n" +
             "12.11\tKuno\n" +
             "12.11\tKurt\n" +
+            "2.2\tKyndelsmässodagen\n" +
             "25.11\tKäthe\n" +
             "27.2\tLage\n" +
             "27.2\tLago\n" +
@@ -1038,6 +1023,7 @@ public class NameMain extends Activity {
             "8.10\tNisse\n" +
             "17.11\tNoomi\n" +
             "11.7\tNora\n" +
+            "1.1\tNyårsdagen\n" +
             "19.4\tOla\n" +
             "19.4\tOlaus\n" +
             "29.7\tOlav\n" +
@@ -1203,6 +1189,7 @@ public class NameMain extends Activity {
             "25.2\tSivard\n" +
             "25.2\tSivert\n" +
             "14.12\tSixten\n" +
+            "29.2\tSkottdagen\n" +
             "15.5\tSofi\n" +
             "15.5\tSofia\n" +
             "15.5\tSofie\n" +
@@ -1263,6 +1250,7 @@ public class NameMain extends Activity {
             "14.3\tTilly\n" +
             "24.7\tTina\n" +
             "24.7\tTitti\n" +
+            "13.1\tTjugondedag jul\n" +
             "2.11\tTobias\n" +
             "17.10\tToini\n" +
             "21.12\tTom\n" +
@@ -1289,6 +1277,7 @@ public class NameMain extends Activity {
             "17.6\tTorvald\n" +
             "5.3\tTova\n" +
             "5.3\tTove\n" +
+            "6.1\tTrettondedag jul\n" +
             "17.3\tTrude\n" +
             "25.9\tTryggve\n" +
             "28.4\tTure\n" +
@@ -1353,6 +1342,7 @@ public class NameMain extends Activity {
             "18.4\tVolmar\n" +
             "18.4\tVolmer\n" +
             "17.8\tVolter\n" +
+            "28.12\tVärnlösa barns dag\n" +
             "11.4\tYlva\n" +
             "10.4\tYngvar\n" +
             "11.2\tYngve\n" +
@@ -1368,233 +1358,6 @@ public class NameMain extends Activity {
             "12.9\tÅse\n" +
             "12.9\tÅslög\n" +
             "9.7\tÖrjan\n" +
-            "26.8\tÖsten\n";
+            "26.8\tÖsten";
 
-
-    ArrayList<String> stavelser;
-    ArrayList<String> randomNames;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_name_main);
-
-        bAdd = (Button) findViewById(R.id.bAdd);
-        bAverage = (Button) findViewById(R.id.bAverage);
-        eName = (EditText) findViewById(R.id.editText);
-        listView = (ListView) findViewById(R.id.listView);
-
-        eName.setText("");
-        stavelser = new ArrayList<String>();
-        names = names();
-        generateStavelser();
-
-        randomNames = new ArrayList<String>();
-
-        for(int i = 0; i < 50;i++){
-            randomNames.add(generateRandomName());
-
-                }
-
-        nAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, randomNames);
-
-        bAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(eName.getText().toString().length()>0){
-                    names.add(eName.getText().toString().toUpperCase());
-                    eName.setText("");
-                    nAdapter.notifyDataSetChanged();
-                }
-            }
-        });
-
-        listView.setAdapter(nAdapter);
-
-        bAverage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(names.size() > 0) {
-                    String name = generateRandomName();
-                    String fixedName = generateRandomName();
-                    new AlertDialog.Builder(NameMain.this)
-                            .setTitle("Randomnamn")
-                            .setMessage("Ett namn skulle kunna vara " + name + "! \n" +
-                                    "Eller varför inte " + fixedName + "!")
-                            .setPositiveButton("Fortsätt", null)
-                            .setNegativeButton("Släng namn", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    names.clear();
-                                    nAdapter.notifyDataSetChanged();
-                                }
-                            }).show();
-                }
-            }
-        });
-
-
-
-    }
-
-    private void generateStavelser(){
-
-
-        for(String n : names){
-            String stavelse = new String("");
-            boolean vowel = false;
-            for(int i = 0; i < n.length(); i++){
-                if(isVokal(n.charAt(i))){
-                    if(vowel){
-
-                        stavelser.add(stavelse);
-                        stavelse = new String("");
-                        stavelse += n.charAt(i);
-                        vowel = false;
-                    }else {
-                        vowel = true;
-                        stavelse += n.charAt(i);
-                    }
-                }else{
-                    stavelse += n.charAt(i);
-                }
-            }
-            if(stavelse.length() > 0) stavelser.add(stavelse);
-        }
-
-    }
-
-    private boolean isVokal(char c){
-        return c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' || c == 'Y' || c == 'Å' || c == 'Ä' || c == 'Ö';
-
-    }
-
-    private String generateFixedName(String name) {
-        StringBuilder newName = new StringBuilder();
-        if(name.length() == 1) return name;
-        if(name.length() == 2){
-            newName.append(name.charAt(0));
-            newName.append(findClosestWovel(name.charAt(1)));
-            return newName.toString();
-        }
-
-        for(int i = 0; i < name.length(); i++){
-           if(i % 3 == 0){
-               newName.append(findClosestWovel(name.charAt(i)));
-           }
-           else{
-               newName.append(name.charAt(i));
-           }
-        }
-
-
-        return newName.toString();
-    }
-
-    private char findClosestWovel(char c){
-        if(c <= 'C') return 'A';
-        if(c <= 'G') return 'E';
-        if(c <= 'L') return 'I';
-        if(c <= 'R') return 'O';
-        if(c <= 'W') return 'U';
-        return 'Y';
-    }
-
-    private String generateAverage() {
-        int nameLength = 0;
-
-        for(String s : names){
-            nameLength+=s.length();
-        }
-
-        nameLength = nameLength / names.size();
-        int[] letters = new int[nameLength];
-
-
-        int j = 0;
-
-        StringBuilder name = new StringBuilder();
-
-        for(int i = 0; i < nameLength; i++){
-            int activeLetters = 0;
-            for(String s : names){
-                if(s.length() > i){
-                    letters[i] += (int) s.charAt(i);
-                    activeLetters++;
-                }
-            }
-            letters[i] = letters[i] / activeLetters;
-            name.append((char) letters[i]);
-        }
-
-        return name.toString();
-
-    }
-
-
-    private String generateRandomName(){
-
-        String name = "";
-
-        Random rand = new Random();
-        int numStavelser = rand.nextInt(4)+1;
-
-        for(int i = 0; i < numStavelser; i++){
-            int index = rand.nextInt(stavelser.size());
-            name += stavelser.get(index);
-        }
-
-        return name;
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_name_main, menu);
-        return true;
-    }
-
-    private ArrayList<String> names(){
-        ArrayList<String> namnList = new ArrayList<String>();
-
-        StringBuilder namnByggare = new StringBuilder();
-        boolean buildingName = false;
-        for(int i = 0; i < namn.length(); i++){
-            char c = namn.charAt(i);
-            if(c == 9){ //Tab
-                buildingName = true;
-                i++;
-            }
-            if(c == 10){ // new line
-                buildingName = false;
-                namnList.add(namnByggare.toString().toUpperCase());
-                namnByggare = new StringBuilder();
-            }
-            if(buildingName){
-                namnByggare.append(namn.charAt(i));
-            }
-
-        }
-
-        return namnList;
-    }
-
-
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
